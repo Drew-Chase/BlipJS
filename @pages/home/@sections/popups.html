@@ -1,0 +1,32 @@
+<h2 class="primary">Popups</h2>
+
+<button class="primary" onclick="(()=>{let loading = new LoadingScreen('Test Loading...', 'This will take 10 seconds!'); setTimeout(()=>loading.close(), 1000*10)}).call()">Load for 10 Seconds</button>
+<h3>Curtain</h3>
+<h4>Without Title</h4>
+<div class="grid">
+    <button class="primary" onclick="new CurtainPopup('test').open()">Maximized</button>
+    <button class="primary" onclick="new CurtainWithBorderPopup('test').open()">Maximized with Border</button>
+    <button class="primary" onclick="new CenteredLargeCurtainPopup('test').open()">Centered Large</button>
+    <button class="primary" onclick="new CenteredSmallCurtainPopup('test').open()">Centered Small</button>
+</div>
+<h4>With Title</h4>
+<div class="grid">
+    <button class="primary" onclick="new CurtainWithTitlePopup('test').open()">Maximized</button>
+    <button class="primary" onclick="new CenteredLargeCurtainWithTitlePopup('test').open()">Centered Large</button>
+    <button class="primary" onclick="new CenteredSmallCurtainWithTitlePopup('test').open()">Centered Small</button>
+</div>
+
+<h3>Fade</h3>
+<h4>Without Title</h4>
+<div class="grid">
+    <button class="primary" onclick="new FadePopup('test').open()">Maximized</button>
+    <button class="primary" onclick="new FadeWithBorderPopup('test').open()">Maximized with Border</button>
+    <button class="primary" onclick="new CenteredLargeFadePopup('test').open()">Centered Large</button>
+    <button class="primary" onclick="new CenteredSmallFadePopup('test').open()">Centered Small</button>
+</div>
+<h4>With Title</h4>
+<div class="grid">
+    <button class="primary" onclick="new FadeWithTitlePopup('test').open()">Maximized</button>
+    <button class="primary" onclick="new CenteredLargeFadeWithTitlePopup('test').open()">Centered Large</button>
+    <button class="primary" onclick="new CenteredSmallFadeWithTitlePopup('test').open()">Centered Small</button>
+</div>
