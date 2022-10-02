@@ -222,7 +222,7 @@ async function Navigate(controller = "home", view = "index", model = {}) {
         model: model
     }
 
-    let url = `../../@pages/${controller}/${view}.html`;
+    let url = `@pages/${controller}/${view}.html`;
     let html = await $.get(url)
     let keys = Object.keys(model);
     let values = Object.values(model)
@@ -255,7 +255,7 @@ async function InitPageLoad() {
         for (let i = 0; i < pageItems.length; i++) {
             let item = pageItems[i];
 
-            let url = `../../@pages/@shared/${$(item).attr('page')}.html`;
+            let url = `@pages/@shared/${$(item).attr('page')}.html`;
             let html = await $.get(url);
             item.outerHTML = html;
         }
@@ -263,7 +263,7 @@ async function InitPageLoad() {
         for (let i = 0; i < sections.length; i++) {
             let section = sections[i]
             if (section.id != "" && section.id != null) {
-                let url = `../../@pages/${page.controller}/@sections/${section.id}.html`
+                let url = `@pages/${page.controller}/@sections/${section.id}.html`
                 let html = await $.get(url);
                 section.innerHTML = html;
             }
