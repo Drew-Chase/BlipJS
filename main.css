@@ -77,6 +77,14 @@ section {
     flex-wrap: wrap;
 }
 
+.centered {
+    margin: auto;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+}
+
 .grid {
     display: flex;
     flex-direction: row;
@@ -679,6 +687,11 @@ dropdown dropdown-body dropdown-item:hover {
     opacity: 1;
 }
 
+.popup .popup-body.centered {
+    width: unset;
+    height: unset;
+}
+
 .popup .popup-body.centered.large {
     top: 10%;
     left: 5%;
@@ -720,8 +733,9 @@ dropdown dropdown-body dropdown-item:hover {
     background-color: var(--background);
     opacity: 0;
     z-index: 999999;
-    transition: opacity 500ms;
+    /* transition: opacity 500ms; */
 }
+
 
 .loading h1 {
     margin: 0;
