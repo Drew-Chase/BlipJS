@@ -41,7 +41,7 @@ class Popup {
         }
         $("html")[0].style.overflow = "hidden";
         $("nav")[0].classList.add('hidden');
-        let url = `../../@popups/${this.name}.html`
+        let url = `@popups/${this.name}.html`
         let html = await $.get(url);
         body.innerHTML = html;
         popup.appendChild(body);
