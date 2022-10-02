@@ -110,11 +110,11 @@ section {
 }
 
 .play {
-    background-image: url('/@icons/play-button.svg');
+    background-image: url('../../@icons/play-button.svg');
 }
 
 .pause {
-    background-image: url('/@icons/pause-button.svg');
+    background-image: url('../../@icons/pause-button.svg');
 }
 
 
@@ -271,7 +271,6 @@ button.outline.secondary:hover {
     height: 100vh;
     min-height: 800px;
     overflow: hidden;
-    background-image: url('/testing/landing-image.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
