@@ -1,11 +1,11 @@
 (() => {
     let stylesheet = document.createElement('link');
-    stylesheet.href = `${window.location.pathname}@libraries/blipjs/main.min.css`
+    stylesheet.href = `../../@libraries/blipjs/main.min.css`
     stylesheet.rel = "stylesheet";
     $("head")[0].appendChild(stylesheet)
     stylesheet = document.createElement('link');
     stylesheet.rel = "stylesheet";
-    stylesheet.href = `${window.location.pathname}@libraries/fontawesome/css/all.min.css`
+    stylesheet.href = `../../@libraries/fontawesome/css/all.min.css`
     $("head")[0].appendChild(stylesheet)
 
 }).call();
@@ -41,7 +41,7 @@ class Popup {
         }
         $("html")[0].style.overflow = "hidden";
         $("nav")[0].classList.add('hidden');
-        let url = `/@popups/${this.name}.html`
+        let url = `../../@popups/${this.name}.html`
         let html = await $.get(url);
         body.innerHTML = html;
         popup.appendChild(body);
@@ -222,7 +222,7 @@ async function Navigate(controller = "home", view = "index", model = {}) {
         model: model
     }
 
-    let url = `${window.location.pathname}@pages/${controller}/${view}.html`;
+    let url = `../../@pages/${controller}/${view}.html`;
     let html = await $.get(url)
     let keys = Object.keys(model);
     let values = Object.values(model)
@@ -255,7 +255,7 @@ async function InitPageLoad() {
         for (let i = 0; i < pageItems.length; i++) {
             let item = pageItems[i];
 
-            let url = `${window.location.pathname}@pages/@shared/${$(item).attr('page')}.html`;
+            let url = `../../@pages/@shared/${$(item).attr('page')}.html`;
             let html = await $.get(url);
             item.outerHTML = html;
         }
@@ -263,7 +263,7 @@ async function InitPageLoad() {
         for (let i = 0; i < sections.length; i++) {
             let section = sections[i]
             if (section.id != "" && section.id != null) {
-                let url = `${window.location.pathname}@pages/${page.controller}/@sections/${section.id}.html`
+                let url = `../../@pages/${page.controller}/@sections/${section.id}.html`
                 let html = await $.get(url);
                 section.innerHTML = html;
             }

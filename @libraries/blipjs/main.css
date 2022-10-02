@@ -52,6 +52,10 @@ main>* {
     padding-top: 150px;
 }
 
+main>*:not(.landing){
+    z-index: 3;
+}
+
 h1 {
     font-size: 4.5rem;
     font-weight: 800;
@@ -274,7 +278,8 @@ button.outline.secondary:hover {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    margin-bottom: -30vh;
+    margin-bottom: -50vh;
+    z-index: -1;
 }
 
 .landing::before{
