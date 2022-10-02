@@ -50,9 +50,6 @@ body {
     overflow: overlay;
 }
 
-main>* {
-    padding-top: 150px;
-}
 
 main>section:not(.landing) {
     z-index: 3;
@@ -80,7 +77,7 @@ h4 {
 }
 
 section {
-    padding: 2rem 1rem;
+    padding: 0rem 1rem;
 }
 
 .col, .row {
@@ -282,7 +279,7 @@ button.outline.secondary:hover, .btn.outline.secondary:hover {
     background-size: cover;
     background-repeat: no-repeat;
     margin-bottom: -50vh;
-    /* z-index: -1; */
+    padding-top: 150px;
 }
 
 .landing::before {
@@ -331,7 +328,7 @@ button.outline.secondary:hover, .btn.outline.secondary:hover {
     transform: translateY(4rem) !important;
 }
 
-.video-player:not(.show) {
+.video-player:not(.show) video {
     cursor: none;
 }
 
@@ -782,6 +779,8 @@ nav nav-items.left {
 
 nav nav-items.centered {
     justify-content: center;
+    height: unset;
+    width: unset;
 }
 
 nav nav-items.right {
