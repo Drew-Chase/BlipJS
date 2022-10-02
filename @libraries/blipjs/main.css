@@ -46,13 +46,14 @@ body {
     background-color: var(--background);
     margin: 0;
     padding: 0;
+    overflow: overlay;
 }
 
 main>* {
     padding-top: 150px;
 }
 
-main>*:not(.landing){
+main>*:not(.landing) {
     z-index: 3;
 }
 
@@ -282,7 +283,7 @@ button.outline.secondary:hover {
     z-index: -1;
 }
 
-.landing::before{
+.landing::before {
     content: '';
     position: absolute;
     top: 0;
@@ -824,7 +825,7 @@ nav.fixed.animated.collapsed .brand {
     font-size: 2rem;
 }
 
-nav.fixed.hidden{
+nav.fixed.hidden {
     transform: translateY(-200px);
 }
 
