@@ -1,11 +1,11 @@
 (() => {
     let stylesheet = document.createElement('link');
-    stylesheet.href = `../../@libraries/blipjs/main.min.css`
+    stylesheet.href = `@libraries/blipjs/main.min.css`
     stylesheet.rel = "stylesheet";
     $("head")[0].appendChild(stylesheet)
     stylesheet = document.createElement('link');
     stylesheet.rel = "stylesheet";
-    stylesheet.href = `../../@libraries/fontawesome/css/all.min.css`
+    stylesheet.href = `@libraries/fontawesome/css/all.min.css`
     $("head")[0].appendChild(stylesheet)
 
 }).call();
