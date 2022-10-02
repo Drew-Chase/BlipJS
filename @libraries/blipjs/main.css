@@ -169,7 +169,7 @@ a {
     width: fit-content;
 }
 
-a:after, .underline:after, dropdown:before {
+a:not(.btn):after, .underline:after, dropdown:before {
     content: '';
     border-bottom: 3px solid var(--primary);
     position: absolute;
@@ -222,7 +222,7 @@ p.\34 {
     box-shadow: 0 0 15px 5px var(--primary);
 }
 
-button {
+button, .btn {
     color: var(--foreground) !important;
     border: none;
     outline: none;
@@ -236,35 +236,35 @@ button {
     transition: filter 200ms, transform 500ms, box-shadow 500ms, background 500ms, color 200ms;
 }
 
-button.primary {
+button.primary, .btn.primary {
     background-color: var(--primary);
 }
 
-button.secondary {
+button.secondary, .btn.secondary {
     background-color: var(--foreground);
     color: var(--background) !important;
 }
 
-button:hover {
+button:hover, .btn:hover {
     filter: contrast(1.1) brightness(.7);
 }
 
-button.outline {
+button.outline, .btn.outline {
     background-color: transparent;
     outline: 2px solid var(--primary);
 }
 
-button.outline:hover {
+button.outline:hover, .btn.outline:hover {
     filter: unset;
     background: var(--primary);
 }
 
-button.outline.secondary {
+button.outline.secondary, .btn.outline.secondary {
     color: var(--foreground) !important;
     outline-color: var(--foreground);
 }
 
-button.outline.secondary:hover {
+button.outline.secondary:hover, .btn.outline.secondary:hover {
     background-color: var(--foreground);
     color: var(--background) !important;
 }
