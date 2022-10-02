@@ -1,3 +1,14 @@
+(() => {
+    let stylesheet = document.createElement('link');
+    stylesheet.href = "main.min.css"
+    stylesheet.rel = "stylesheet";
+    $("head")[0].appendChild(stylesheet)
+    stylesheet = document.createElement('link');
+    stylesheet.rel = "stylesheet";
+    stylesheet.href = "@libraries/fontawesome/css/all.min.css"
+    $("head")[0].appendChild(stylesheet)
+}).call();
+
 async function closeAllPopups() {
     $("html")[0].style.overflow = "";
     let popup = $(".popup")[0]
@@ -46,6 +57,7 @@ class CurtainPopup extends Popup {
         this.classes.push("curtain");
     }
 }
+
 class CurtainWithBorderPopup extends CurtainPopup {
     constructor(name) {
         super(name);
@@ -173,9 +185,34 @@ var page = {
     view: null,
     model: {}
 }
-
+var lastpage = null
+BuildPage()
+Navigate(page.controller == null ? "home" : page.controller, page.view == null ? "index" : page.view, page.model)
+function BuildPage() {
+    let sections = window.location.search.replaceAll("?", "").split('&');
+    sections.forEach(kv => {
+        let key = kv.split('=')[0]
+        let value = kv.split('=')[1]
+        switch (key) {
+            case "controller":
+                page.controller = value;
+                break;
+            case "view":
+                page.view = value;
+                break;
+            default:
+                let json = `{"${key}": "${value}"}`
+                Object.assign(page.model, JSON.parse(json));
+                break;
+        }
+    })
+}
+async function NavBack() {
+    await Navigate(lastpage.controller, lastpage.view, lastpage.model);
+}
 async function Navigate(controller = "home", view = "index", model = {}) {
     let loading = new LoadingScreen();
+    lastpage = page;
     page = {
         controller: controller,
         view: view,
@@ -184,17 +221,25 @@ async function Navigate(controller = "home", view = "index", model = {}) {
 
     let url = `/@pages/${controller}/${view}.html`;
     let html = await $.get(url)
+    let keys = Object.keys(model);
+    let values = Object.values(model)
+    let modelp = "";
+    for (let i = 0; i < keys.length; i++) {
+        let key = keys[i];
+        let value = values[i];
+        modelp += `&${key}=${value}`
+        if (html.toLowerCase().includes(`{${key.toLowerCase()}}`)) {
+            html = html.replaceAll(`{src}`, value);
+        }
+    }
+    window.history.pushState("", "", `?controller=${controller}&view=${view}${modelp}`)
     $("main")[0].innerHTML = html;
     await InitPageLoad()
     loading.close();
 }
 async function InitPageLoad() {
-
-    let loading = new LoadingScreen();
     await Init()
-    loading.close()
     async function Init() {
-        InitStyles();
         await InitSections()
         InitVideoPlayer()
         InitPageElements();
@@ -209,16 +254,6 @@ async function InitPageLoad() {
                 section.innerHTML = html;
             }
         }
-    }
-    function InitStyles() {
-        let stylesheet = document.createElement('link');
-        stylesheet.href = "main.min.css"
-        stylesheet.rel = "stylesheet";
-        $("head")[0].appendChild(stylesheet)
-        stylesheet = document.createElement('link');
-        stylesheet.rel = "stylesheet";
-        stylesheet.href = "@libraries/fontawesome/css/all.min.css"
-        $("head")[0].appendChild(stylesheet)
     }
     function InitVideoPlayer() {
         Array.from($("video-player")).forEach(player => {
@@ -536,8 +571,7 @@ async function InitPageLoad() {
                     link.title = `External Link: ${src}`
                     link.href = "#";
                     $(link).on('click', () => {
-                        let popup = new ExternalLinkPopup(src);
-                        popup.open();
+                        Navigate("@error", "external", { src: src })
                     })
                 }
             }
