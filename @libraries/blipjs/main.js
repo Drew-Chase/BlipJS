@@ -343,6 +343,8 @@ async function InitPageLoad() {
             volume.classList.add('mute-button', 'fa-solid', 'fa-volume-up')
             volume.title = "mute/unmute"
 
+
+
             let fullscreen = document.createElement('i')
             fullscreen.classList.add('fullscreen-btn', 'fa-solid', 'fa-expand')
             fullscreen.title = "toggle fullscreen"
@@ -528,7 +530,7 @@ async function InitPageLoad() {
 
             $(player).on("mouseleave", () => {
                 if (!video.paused)
-                    show();
+                    hide();
                 if (timeout != null) {
                     clearInterval(timeout)
                 }
