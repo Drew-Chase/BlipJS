@@ -343,8 +343,6 @@ async function InitPageLoad() {
             volume.classList.add('mute-button', 'fa-solid', 'fa-volume-up')
             volume.title = "mute/unmute"
 
-
-
             let fullscreen = document.createElement('i')
             fullscreen.classList.add('fullscreen-btn', 'fa-solid', 'fa-expand')
             fullscreen.title = "toggle fullscreen"
@@ -616,6 +614,69 @@ async function InitPageLoad() {
                 toggle.dispatchEvent(new ToggleEvent($(toggle).attr('value') == "true"));
             })
         })
+
+        Array.from($("slider")).forEach(slider => {
+
+            let track = document.createElement('div');
+            track.classList.add('track');
+            let progress = document.createElement('div');
+            progress.classList.add('progress');
+            let preview = document.createElement('span');
+            preview.classList.add('preview');
+            progress.appendChild(preview)
+            track.appendChild(progress)
+            slider.appendChild(track);
+
+            let drag = false;
+            let timer = null;
+            let min = $(slider).attr('min');
+            let max = $(slider).attr('max');
+            let value = $(slider).attr('value');
+
+            if (value == null) value = 0;
+            if (min == null) min = 0;
+            if (max == null) max = 100;
+
+
+            progress.style.maxWidth = `${value / max * 100}%`;
+
+
+            $(slider).on("mousedown", () => {
+                drag = true;
+            })
+            $(document).on("mouseup", () => {
+                drag = false;
+            })
+            $(document).on("mousemove", e => {
+                if (drag) {
+                    slide(e.clientX);
+                }
+            })
+
+            $(slider).on('click', e => {
+                slide(e.clientX);
+            })
+
+            function slide(x) {
+                let bound = $(slider).find(".track")[0].getBoundingClientRect();
+                let percentage = ((x - bound.left) / bound.width) * 100;
+                if (percentage <= 100 && percentage >= 0) {
+                    $(slider).find(".progress")[0].style.maxWidth = `${percentage}%`;
+                    let v = Math.round(max / 100 * percentage);
+
+                    if (timer != null)
+                        clearTimeout(timer);
+                    $(slider).find('.preview')[0].classList.add('show');
+                    $(slider).find('.preview')[0].innerText = v;
+                    $(slider).attr('value', v);
+                    slider.dispatchEvent(new SliderEvent(v));
+                    timer = setTimeout(() => {
+                        $(slider).find('.preview')[0].classList.remove('show');
+                    }, 2000)
+                }
+            }
+        })
+
         Array.from($("dropdown")).forEach(dropdown => {
 
             $(dropdown).attr('tabindex', 0);
@@ -654,6 +715,12 @@ async function InitPageLoad() {
     class DropdownEvent extends Event {
         constructor(value) {
             super("dropdown", { bubbles: true, cancelable: true, composed: true });
+            this.value = value;
+        }
+    }
+    class SliderEvent extends Event {
+        constructor(value) {
+            super("slide", { bubbles: true, cancelable: true, composed: true });
             this.value = value;
         }
     }
