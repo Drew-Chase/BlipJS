@@ -1,0 +1,25 @@
+<nav class="fixed shadow animated">
+    <span class="brand">BlipJS</span>
+    <nav-items class="right">
+        <button class="primary nav-item">Home</button>
+        <button class="secondary nav-item">About</button>
+        <vr></vr>
+        <dropdown class="nav-item">
+            <dropdown-name>Location</dropdown-name>
+            <dropdown-body>
+                <dropdown-item class="selected" onclick="$('nav-items')[0].classList.add('right');$('nav-items')[0].classList.remove('left');$('nav-items')[0].classList.remove('centered')">Right</dropdown-item>
+                <dropdown-item onclick="$('nav-items')[0].classList.add('left');$('nav-items')[0].classList.remove('right');$('nav-items')[0].classList.remove('centered')">Left</dropdown-item>
+                <dropdown-item onclick="$('nav-items')[0].classList.add('centered');$('nav-items')[0].classList.remove('right');$('nav-items')[0].classList.remove('left')">Center</dropdown-item>
+            </dropdown-body>
+        </dropdown>
+        <dropdown class="nav-item">
+            <dropdown-name>Fixture</dropdown-name>
+            <dropdown-body>
+                <dropdown-item class="selected" onclick="$('nav')[0].classList.add('fixed');">Fixed</dropdown-item>
+                <dropdown-item onclick="$('nav')[0].classList.remove('fixed');">Top</dropdown-item>
+            </dropdown-body>
+        </dropdown>
+        <toggle ontoggle="$('nav')[0].classList.toggle('animated');" value="true">Animated</toggle>
+
+    </nav-items>
+</nav>
