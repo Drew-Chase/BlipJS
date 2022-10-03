@@ -9,6 +9,97 @@
     $("head")[0].appendChild(stylesheet)
 
 }).call();
+class ToggleEvent extends Event {
+    constructor(value) {
+        super("toggle", { bubbles: true, cancelable: true, composed: true });
+        this.value = value;
+    }
+}
+class DropdownEvent extends Event {
+    constructor(value) {
+        super("dropdown", { bubbles: true, cancelable: true, composed: true });
+        this.value = value;
+    }
+}
+class SliderEvent extends Event {
+    constructor(value) {
+        super("slide", { bubbles: true, cancelable: true, composed: true });
+        this.value = value;
+    }
+}
+
+class NavigationCompleteEvent extends Event {
+    constructor(value) {
+        super("nav-complete", { bubbles: true, cancelable: true, composed: true });
+        this.value = value;
+    }
+}
+class NavigationStartEvent extends Event {
+    constructor(value) {
+        super("nav-start", { bubbles: true, cancelable: true, composed: true });
+        this.value = value;
+    }
+}
+class NavigationProgressUpdateEvent extends Event {
+    constructor(value) {
+        super("nav-progress-update", { bubbles: true, cancelable: true, composed: true });
+        this.value = value;
+    }
+}
+
+function hslToHex(h, s, l) {
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = n => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+} function hexToHSL(H) {
+    // Convert hex to RGB first
+    let r = 0, g = 0, b = 0;
+    if (H.length == 4) {
+        r = "0x" + H[1] + H[1];
+        g = "0x" + H[2] + H[2];
+        b = "0x" + H[3] + H[3];
+    } else if (H.length == 7) {
+        r = "0x" + H[1] + H[2];
+        g = "0x" + H[3] + H[4];
+        b = "0x" + H[5] + H[6];
+    }
+    // Then to HSL
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    let cmin = Math.min(r, g, b),
+        cmax = Math.max(r, g, b),
+        delta = cmax - cmin,
+        h = 0,
+        s = 0,
+        l = 0;
+
+    if (delta == 0)
+        h = 0;
+    else if (cmax == r)
+        h = ((g - b) / delta) % 6;
+    else if (cmax == g)
+        h = (b - r) / delta + 2;
+    else
+        h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+
+    if (h < 0)
+        h += 360;
+
+    l = (cmax + cmin) / 2;
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    s = +(s * 100).toFixed(1);
+    l = +(l * 100).toFixed(1);
+
+    return "hsl(" + h + "," + s + "%," + l + "%)";
+}
 
 async function closeAllPopups() {
     $("html")[0].style.overflow = "";
@@ -221,6 +312,7 @@ async function Navigate(controller = "home", view = "index", model = {}) {
         view: view,
         model: model
     }
+    document.dispatchEvent(new NavigationStartEvent(page))
 
     let url = `@pages/${controller}/${view}.html`;
     let html = await $.get(url)
@@ -241,6 +333,7 @@ async function Navigate(controller = "home", view = "index", model = {}) {
     $("main")[0].innerHTML = html;
     await InitPageLoad()
     loading.close();
+    document.dispatchEvent(new NavigationCompleteEvent(page))
 }
 async function InitPageLoad() {
     await Init()
@@ -626,6 +719,11 @@ async function InitPageLoad() {
             progress.appendChild(preview)
             track.appendChild(progress)
             slider.appendChild(track);
+            let suffix = $(slider).attr('suffix')
+            if (suffix == null) suffix = ""
+
+
+            $(slider).attr('tabindex', 0)
 
             let drag = false;
             let timer = null;
@@ -667,7 +765,7 @@ async function InitPageLoad() {
                     if (timer != null)
                         clearTimeout(timer);
                     $(slider).find('.preview')[0].classList.add('show');
-                    $(slider).find('.preview')[0].innerText = v;
+                    $(slider).find('.preview')[0].innerText = `${v}${suffix}`;
                     $(slider).attr('value', v);
                     slider.dispatchEvent(new SliderEvent(v));
                     timer = setTimeout(() => {
@@ -676,6 +774,7 @@ async function InitPageLoad() {
                 }
             }
         })
+
 
         Array.from($("dropdown")).forEach(dropdown => {
 
@@ -706,23 +805,6 @@ async function InitPageLoad() {
             })
         })
     }
-    class ToggleEvent extends Event {
-        constructor(value) {
-            super("toggle", { bubbles: true, cancelable: true, composed: true });
-            this.value = value;
-        }
-    }
-    class DropdownEvent extends Event {
-        constructor(value) {
-            super("dropdown", { bubbles: true, cancelable: true, composed: true });
-            this.value = value;
-        }
-    }
-    class SliderEvent extends Event {
-        constructor(value) {
-            super("slide", { bubbles: true, cancelable: true, composed: true });
-            this.value = value;
-        }
-    }
+
 
 }
