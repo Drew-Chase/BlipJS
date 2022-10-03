@@ -13,8 +13,43 @@
     <page-item page="nav"></page-item>
     <main></main>
 
-    <script src="@libraries/blipjs/main.min.js"></script>
+    <script src="@libraries/blipjs/main.js"></script>
+    <script>
+        $(document).on('nav-complete', () => {
 
+            let root = document.documentElement;
+            $("slider#border-radius").on('slide', e => {
+                root.style.setProperty("--border-radius", e.originalEvent.value + "px");
+            })
+            let styles = getComputedStyle(root);
+            let primary = styles.getPropertyValue("--primary");
+            let primaryHSL = primary.replace("hsl(", "").replace(")", "").replaceAll("%", "").trim().split(',');
+            let primaryHex = hslToHex(primaryHSL[0], primaryHSL[1], primaryHSL[2])
+
+            let background = styles.getPropertyValue("--background");
+            let backgroundHSL = background.replace("hsl(", "").replace(")", "").replaceAll("%", "").trim().split(',');
+            let backgroundHex = hslToHex(backgroundHSL[0], backgroundHSL[1], backgroundHSL[2])
+
+            $("input#primary-picker[type=color]").attr('value', primaryHex)
+            $("input#foreground-picker[type=color]").attr('value', styles.getPropertyValue("--foreground"))
+            $("input#background-picker[type=color]").attr('value', backgroundHex)
+            $("input#primary-picker[type=color]").on('change', e => {
+                let hsl = hexToHSL(e.target.value).replace("hsl(", "").replace(")", "").trim().split(',')
+                root.style.setProperty("--primary-hue", hsl[0]);
+                root.style.setProperty("--primary-saturation", hsl[1]);
+                root.style.setProperty("--primary-lightness", hsl[2]);
+            })
+            $("input#background-picker[type=color]").on('change', e => {
+                let hsl = hexToHSL(e.target.value).replace("hsl(", "").replace(")", "").trim().split(',')
+                root.style.setProperty("--background-hue", hsl[0]);
+                root.style.setProperty("--background-saturation", hsl[1]);
+                root.style.setProperty("--background-lightness", hsl[2]);
+            })
+            $("input#foreground-picker[type=color]").on('change', e => {
+                root.style.setProperty("--foreground", e.target.value);
+            })
+        })
+    </script>
 </body>
 
 </html>
