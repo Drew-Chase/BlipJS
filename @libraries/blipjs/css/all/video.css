@@ -1,0 +1,162 @@
+.play {
+    background-image: url('../../../@icons/play-button.svg');
+}
+
+.pause {
+    background-image: url('../../../@icons/pause-button.svg');
+}
+
+
+.play, .pause {
+    content: '';
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 15px;
+    aspect-ratio: 1/1;
+}
+
+.video-player {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.video-player>video {
+    cursor: pointer;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.video-player .controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    transform: translateY(4rem);
+    transition: transform 500ms;
+    z-index: 2;
+}
+
+.video-player:not(.show) .controls {
+    transform: translateY(4rem) !important;
+}
+
+.video-player:not(.show) video {
+    cursor: none;
+}
+
+.video-player .controls i {
+    cursor: pointer;
+    margin-right: 15px;
+    font-size: 1.5rem;
+    width: 1.2rem;
+    opacity: .7;
+    transition: opacity 200ms;
+}
+
+.video-player .controls i:hover {
+    opacity: 1;
+}
+
+.video-player .controls>* {
+    margin: 0 1rem;
+}
+
+.video-player .controls .video-track-timestamp .total-timestamp {
+    font-weight: 200;
+}
+
+.video-player .controls .video-track-timestamp>span {
+    margin: 0 10px;
+}
+
+.video-player .controls .control-buttons {
+    width: 100%;
+}
+
+.video-player .controls .progress {
+    position: absolute;
+    width: calc(100% - 2rem);
+    height: 5px;
+    min-height: 5px;
+    top: -5px;
+    left: 1rem;
+    right: 1rem;
+    background-color: var(--background-lighter);
+    margin: 0;
+    cursor: pointer;
+    transition: min-height 200ms, top 200ms;
+}
+
+.video-player .controls:hover .progress {
+    min-height: 20px;
+    top: -20px;
+}
+
+.video-player .controls .progress .track {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--primary);
+    margin: 0;
+}
+
+.video-player .controls .progress .hover {
+    max-width: 0%;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    right: 0;
+    opacity: .75;
+    filter: contrast(.5);
+    background-color: var(--primary);
+    margin: 0;
+}
+
+.video-player .controls .progress .preview {
+    position: absolute;
+    top: calc(-50px - 1rem);
+    background: rgba(0, 0, 0, .5);
+    padding: 1rem;
+}
+
+.video-player.show::after {
+    opacity: 1;
+}
+
+.video-player::after {
+    content: '';
+    position: absolute;
+    height: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, black);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 500ms;
+    pointer-events: none;
+}
+
+.video-player:hover .controls, .video-player.show .controls {
+    transform: translateY(0px);
+}
+
+.video-player .controls .progress .track {
+    max-width: 0px;
+    transition: max-width 500ms linear;
+}

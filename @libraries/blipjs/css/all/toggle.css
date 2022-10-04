@@ -1,0 +1,35 @@
+toggle {
+    position: relative;
+    cursor: pointer;
+    margin-left: 5rem;
+    height: 1.5rem;
+    align-items: center;
+    display: flex;
+    width: fit-content;
+    padding: 1rem;
+    text-align: center;
+}
+
+toggle::before, toggle::after {
+    content: '';
+    position: absolute;
+    left: -4rem;
+    height: 1.5rem;
+    border-radius: var(--border-radius);
+}
+
+toggle::before {
+    background: var(--background);
+    filter: brightness(3);
+    width: 4rem;
+}
+
+toggle::after {
+    background: var(--primary);
+    width: 2rem;
+    transition: left 200ms;
+}
+
+toggle[value="true"]::after {
+    left: -2rem;
+}

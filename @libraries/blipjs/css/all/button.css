@@ -1,0 +1,76 @@
+a {
+    margin: .5rem 0;
+    text-decoration: none;
+    color: var(--primary);
+    position: relative;
+    font-size: inherit;
+    transition: font-weight 200ms;
+    width: fit-content;
+}
+
+a:not(.btn):after, .underline:after, dropdown:before {
+    content: '';
+    border-bottom: 3px solid var(--primary);
+    position: absolute;
+    max-width: 0px;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transition: max-width 500ms;
+}
+
+a:hover {
+    font-weight: 900;
+}
+
+a:hover:after, .underline:hover:after, dropdown:hover:before, .underline[show]::after {
+    max-width: 100%;
+}
+
+button, .btn {
+    color: var(--foreground) !important;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 1rem;
+    margin: 1rem;
+    font-weight: 600;
+    box-shadow: 0 0 0px 0px rgba(0, 0, 0, 1);
+    width: calc(100% - 2rem);
+    border-radius: var(--border-radius);
+    transition: filter 200ms, transform 500ms, box-shadow 500ms, background 500ms, color 200ms;
+}
+
+button.primary, .btn.primary {
+    background-color: var(--primary);
+}
+
+button.secondary, .btn.secondary {
+    background-color: var(--foreground);
+    color: var(--background) !important;
+}
+
+button:hover, .btn:hover {
+    filter: contrast(1.1) brightness(.7);
+}
+
+button.outline, .btn.outline {
+    background-color: transparent;
+    outline: 2px solid var(--primary);
+}
+
+button.outline:hover, .btn.outline:hover {
+    filter: unset;
+    background: var(--primary);
+}
+
+button.outline.secondary, .btn.outline.secondary {
+    color: var(--foreground) !important;
+    outline-color: var(--foreground);
+}
+
+button.outline.secondary:hover, .btn.outline.secondary:hover {
+    background-color: var(--foreground);
+    color: var(--background) !important;
+}
