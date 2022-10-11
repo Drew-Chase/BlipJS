@@ -1,5 +1,5 @@
 
-class ToggleEvent extends Event {
+class ToggleEvent extends Event { 
     constructor(value) {
         super("toggle", { bubbles: true, cancelable: true, composed: true });
         this.value = value;

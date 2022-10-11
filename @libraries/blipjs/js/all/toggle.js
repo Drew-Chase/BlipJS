@@ -6,4 +6,4 @@ $(document).on('nav-complete', () => {
             toggle.dispatchEvent(new ToggleEvent($(toggle).attr('value') == "true"));
         })
     })
-})
+}) 

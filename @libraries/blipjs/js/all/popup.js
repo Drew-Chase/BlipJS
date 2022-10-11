@@ -1,4 +1,4 @@
-let popupLoaded = false
+let popupLoaded = false 
 $(document).on('nav-complete', () => {
     if (!popupLoaded) {
         popupLoaded = true;

@@ -18,7 +18,7 @@ colorpicker .body {
     z-index: 1;
     display: flex;
     width: 200%;
-    height: calc(100% - 10rem);
+    height: calc(100% - 10rem);  
     left: 0%;
     top: 50px;
     transition: left 500ms;

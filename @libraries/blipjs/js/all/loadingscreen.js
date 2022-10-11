@@ -1,4 +1,4 @@
-class LoadingScreen {
+class LoadingScreen { 
     constructor(title = null, message = null) {
         $("html")[0].style.overflow = "hidden";
         title = title == null ? "Loading..." : title;

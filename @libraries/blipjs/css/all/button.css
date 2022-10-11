@@ -12,7 +12,7 @@ a:not(.btn):after, .underline:after, dropdown:before {
     content: '';
     border-bottom: 3px solid var(--primary);
     position: absolute;
-    max-width: 0px;
+    max-width: 0px; 
     width: 100%;
     height: 100%;
     left: 0;

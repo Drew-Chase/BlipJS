@@ -1,4 +1,4 @@
-$(document).on('nav-complete', () => {
+$(document).on('nav-complete', () => { 
     Array.from($("a")).forEach(link => {
         let src = link.href;
         if (src != null) {
@@ -11,4 +11,4 @@ $(document).on('nav-complete', () => {
             }
         }
     })
-})
+}) 

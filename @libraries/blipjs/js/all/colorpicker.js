@@ -16,7 +16,7 @@ $(document).on('nav-complete', () => {
                                     </div>
                                     <div class="sat-lat">
                                         <span class="cursor"></span>
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                             <div class="sliders">

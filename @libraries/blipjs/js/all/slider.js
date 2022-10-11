@@ -10,7 +10,7 @@ $(document).on('nav-complete', () => {
         progress.classList.add('progress');
         let preview = document.createElement('span');
         preview.classList.add('preview');
-        progress.appendChild(preview)
+        progress.appendChild(preview) 
         track.appendChild(progress)
         slider.appendChild(name);
         slider.appendChild(track);

@@ -16,7 +16,7 @@ dropdown.primary {
 
 
 dropdown:hover {
-    filter: unset;
+    filter: unset; 
 }
 
 dropdown::after {

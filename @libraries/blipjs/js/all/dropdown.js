@@ -1,4 +1,4 @@
-$(document).on('nav-complete', () => {
+$(document).on('nav-complete', () => { 
     Array.from($("dropdown")).forEach(dropdown => {
 
         $(dropdown).attr('tabindex', 0);

@@ -1,4 +1,4 @@
-let navLoaded = false;
+let navLoaded = false; 
 $(document).on('nav-complete', () => {
     if (!navLoaded) {
         navLoaded = true
