@@ -5,12 +5,19 @@ nav {
     z-index: 99;
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 nav .brand {
     padding: 2rem;
     font-size: 2rem;
     font-weight: 600;
+    max-height: 50%;
+    cursor: pointer;
+}
+
+nav .brand img {
+    max-height: 50px;
 }
 
 nav nav-items {
@@ -24,7 +31,7 @@ nav nav-items.left {
 }
 
 nav nav-items.centered {
-    justify-content: center; 
+    justify-content: center;
     height: unset;
     width: unset;
 }
@@ -71,6 +78,15 @@ nav.fixed.animated.collapsed, nav.fixed:not(.animated) {
 
 nav.fixed.animated.collapsed .brand {
     font-size: 2rem;
+}
+
+nav.fixed.animated .brand img {
+    max-height: 100px;
+    transition: max-height 500ms;
+}
+
+nav.fixed.animated.collapsed .brand img {
+    max-height: 50px;
 }
 
 nav.fixed.hidden {
