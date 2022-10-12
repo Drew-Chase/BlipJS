@@ -5,7 +5,6 @@ nav {
     z-index: 99;
     display: flex;
     align-items: center;
-    overflow: hidden;
 }
 
 nav .brand {
